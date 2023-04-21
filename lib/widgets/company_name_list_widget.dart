@@ -7,19 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../repo/ev_verde_repo.dart';
-
+import '../utils/preference_utils.dart';
+final key = new GlobalKey<CompanyNameListStateWidget>();
 class CompanyNameListWidget extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _CompanyNameListWidget();
+  State<StatefulWidget> createState() => CompanyNameListStateWidget();
 }
 
-class _CompanyNameListWidget extends State<CompanyNameListWidget> {
+class CompanyNameListStateWidget extends State<CompanyNameListWidget> {
   var selectedCompanyName;
-  var isCompanySeleced = false;
-
+  var isCompanySelected = false;
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
       create: (context) => CompanyListCubit(EvVerdeRepo()),
       child: BlocConsumer<CompanyListCubit, CompanyListState>(
@@ -37,26 +36,24 @@ class _CompanyNameListWidget extends State<CompanyNameListWidget> {
                         child: Text('${e.vehicleCompanyName}'));
                   }).toList(),
                   onChanged: (value) {
-                    if (kDebugMode) {
-                      print(isCompanySeleced);
-                    }
                     setState(() {
                       selectedCompanyName = value;
-                      isCompanySeleced = true;
+                      isCompanySelected = true;
+                      PreferenceUtils.setString('companyname', selectedCompanyName.toString());
                     });
                     if (kDebugMode) {
                       print(selectedCompanyName);
-                      print(isCompanySeleced);
+                      print(isCompanySelected);
                     }
-                    //context.read<CompanyListCubit>().getCompanyModelList(vid: selectedCompanyName);
-                    //BlocProvider.of<CompanyListCubit>(context).getCompanyModelList(vid: selectedCompanyName);
                   },
                 ),
-                if(isCompanySeleced)
+                if(isCompanySelected)
                   CompanyModelListWidget(vid: selectedCompanyName)
                 else
-                  Container(
-                    child: Text('Select Company Model'),
+                  DropdownButtonFormField(
+                    hint: const Text('Select Model Name'),
+                    items: const [],
+                    onChanged: (value) {  },
                   ),
               ],
             );
@@ -67,5 +64,7 @@ class _CompanyNameListWidget extends State<CompanyNameListWidget> {
       ),
     );
   }
+
+
 
 }

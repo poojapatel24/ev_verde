@@ -7,9 +7,10 @@ import '../repo/ev_verde_repo.dart';
 class CompanyModelListCubit extends Cubit<CompanyModelListState> {
   EvVerdeRepo evVerdeRepo;
   int vid;
-  CompanyModelListCubit(this.evVerdeRepo,this.vid) :super(CompanyModelListInitial()){
+  CompanyModelListCubit(this.evVerdeRepo,this.vid) :super(CompanyModelListInitial());
+ /* {
     getCompanyModelList(vid: vid);
-  }
+  }*/
 
   Future<void> getCompanyModelList({required int vid}) async{
     try{
