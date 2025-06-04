@@ -2,10 +2,10 @@ import 'package:uuid/uuid.dart';
 
 class Constants{
   //-----------------api call end-----------------
-  String baseUrl='https://logs.evsecerebro.com:7273/';
-  String version='api/v1/';
-  String clientKey='11db0359-160b-4764-842d-b294048efe90';
-  String uuid ='d67e8c62-b792-420b-999a-d0cf134f1c00';
+  String baseUrl='';
+  String version='';
+  String clientKey='';
+  String uuid ='';
 
   String deviceInfo='api/v1/device-activity';
   String login='api/v2/auth/mobile/login';
